@@ -33,7 +33,7 @@ class ModelTrainer:
             X_train,y_train, X_test, y_test = (
                 train_array[:,:-1],
                 train_array[:,-1],
-                test_array[:,:],
+                test_array[:,:-1],
                 test_array[:,-1]
             )
             models = {
@@ -46,7 +46,7 @@ class ModelTrainer:
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
             model_report:dict=evaluate_models(X_train=X_train, y_train=y_train,
-                                            X_test=X_test,y_test=y_test)
+                                            X_test=X_test,y_test=y_test, models=models)
             
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
